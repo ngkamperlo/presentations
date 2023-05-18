@@ -1,4 +1,1 @@
-To generate slides html:
-```bash
-cp -R slides/img build/img && marp slides/Slides.md -o build/index.html --html
-```
+[SDET - Our Journey with Micro-Frontends at GWI](https://ngkamperlo.github.io/presentations/sdet-1)
