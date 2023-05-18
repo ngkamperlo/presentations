@@ -99,10 +99,24 @@ style: |
 
 ---
 
+<div class="columns">
+<div>
+
 # Common UI Components with Logic — Web Components
 
 - The problem: MFEs had common pieces of functionality regardless of the technology used
 - The solution: Implement functionality only once and wrap the output down to web components
+
+</div>
+
+<div>
+
+![Image](./img/web.components.png)
+
+</div>
+</div>
+
+
 
 ---
 
