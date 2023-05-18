@@ -1,22 +1,29 @@
 ---
 marp: true
+html: true
 theme: default
-paginate: true
 style: |
   .columns {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
+  .vert {
+    vertical-align: middle
+  }
   .fa-twitter { color: aqua; }
-  .fa-mastodon { color: purple; }
   .fa-linkedin { color: blue; }
   .fa-window-maximize { color: skyblue; }
-  @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css'
+  .fa-th-large {
+    color: blue;
+  }
+
+  @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+
 ---
 
 ## Naim Gkamperlo
-### Associate Director of Engineering<br>GWI
+### Associate Director of Engineering<br>GWI</br>
 
 <i class="fa-brands fa-twitter"></i> Twitter: @ngkamperlo
 <i class="fa-brands fa-linkedin"></i> LinkedIn: - [https://linkedin.com/in/ngkamperlo](https://linkedin.com/in/ngkamperlo)
