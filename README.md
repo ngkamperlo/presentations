@@ -1,4 +1,4 @@
 To generate slides html:
 ```bash
-marp slides/Slides.md -o index.html --html
+cp -R slides/img build/img && marp slides/Slides.md -o build/index.html --html
 ```
