@@ -94,6 +94,10 @@ style: |
 - Can be trained on specific data for customized output.
 
 ---
+
+![Image](./img/prompt.png)
+
+---
 # The Integration Process 🧪
 
 1. GPT: to create marp markdown basis of the presentation
