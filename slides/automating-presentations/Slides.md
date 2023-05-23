@@ -115,7 +115,7 @@ style: |
 - The combination of VSCode, Marp, GitHub Pages, and GPT creates a powerful, automated, and free solution for presentation creation.
 - Allows for streamlined, repeatable, and high-quality presentations.
 - Give it a try
-  <i class="fa-brands fa-github"></i> GitHub: [Link](https://github.com/ngkamperlo/presentations/automating-presentations)
+  <i class="fa-brands fa-github"></i> GitHub: [Link](https://github.com/ngkamperlo/presentations)
 
 
 --- 
