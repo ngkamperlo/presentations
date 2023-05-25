@@ -48,11 +48,26 @@ style: |
 <!-- _backgroundColor: #003c71 -->
 <!-- _color: #3dcbda -->
 
+
+
+<div class="columns">
+<div>
+
 # What is Markdown?
 
 - A lightweight markup language with plain-text-formatting syntax.
 - Designed for easy reading and writing.
 - Used widely for documentation, README files, and content creation.
+
+</div>
+
+<div>
+
+![Image](./img/markdown.png)
+
+</div>
+</div>
+
 
 ---
 # VSCode
