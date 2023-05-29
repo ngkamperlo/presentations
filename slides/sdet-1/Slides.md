@@ -116,11 +116,25 @@ style: |
 
 ---
 
+
+<div class="columns">
+<div>
+
 ## Webcomponents - Solutions
 
 - Semver implementation
 - Communication between component and MFEs by utilizing browser custom events and html attributes
 - Store the web components in an internal storybook for everyone to review
+
+</div>
+
+<div>
+
+![Image](./img/mfe-component-communication.png)
+
+</div>
+</div>
+
 
 ---
 
@@ -165,7 +179,9 @@ style: |
 
 ---
 
-# Thank You!
+# Thank You! 🤘
+# Naim Gkamperlo
+
 <i class="fa-brands fa-twitter"></i> Twitter: @ngkamperlo
 <i class="fa-brands fa-linkedin"></i> LinkedIn: - [https://linkedin.com/in/ngkamperlo](https://linkedin.com/in/ngkamperlo)
 <i class="fa fa-window-maximize"></i> Blog: [https://medium.com/ngkamperlo](https://medium.com/ngkamperlo)
