@@ -41,13 +41,20 @@
 }
 
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
-;">
+;"><div class="columns">
+<div>
 <h2 id="naim-gkamperlo">Naim Gkamperlo</h2>
 <h3 id="associate-director-of-engineeringbrgwibr">Associate Director of Engineering<br /><strong>GWI</strong><br /></h3>
 <p><i class="fa-brands fa-twitter"></i> Twitter: @ngkamperlo<br />
 <i class="fa-brands fa-linkedin"></i> LinkedIn: <a href="https://linkedin.com/in/ngkamperlo">https://linkedin.com/in/ngkamperlo</a><br />
 <i class="fa fa-window-maximize"></i> Blog: <a href="https://medium.com/ngkamperlo">https://medium.com/ngkamperlo</a><br />
 <i class="fa-brands fa-github"></i> GitHub: <a href="https://github.com/ngkamperlo">https://github.com/ngkamperlo</a></p>
+</div>
+<div>
+<p><a href="https://github.com/ngkamperlo/blackbox">Github repo</a><br />
+<img src="./img/presentation.png" alt="Image" /></p>
+</div>
+</div>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="2" data-paginate="true" data-theme="default" data-style=".columns {
   display: grid;
@@ -164,13 +171,15 @@
 ;">
 <h1 id="the-problem">The Problem</h1>
 <ul>
-<li>MFEs require reusable components across different MFEs.</li>
+<li>Need for reusable components across different MFEs.</li>
 <li>The common practice is to restrict communication between MFEs as much as possible.</li>
-<li>The above results in not fulfilling all product requirements.</li>
+<li>The above resulted in inability to fulfill all product requirements.</li>
 <li>Our specific need in GWI:
 <ul>
-<li>a small enough and complex enough component tied with a UI which can</li>
-<li>be utilized across multiple MFEs regardless of their tech stack</li>
+<li>a small enough and complex enough component</li>
+<li>tied with a UI which can</li>
+<li>be utilized across multiple MFEs</li>
+<li>regardless of their tech stack</li>
 </ul>
 </li>
 </ul>
@@ -296,7 +305,7 @@
 <h1 id="initial-solution">Initial Solution</h1>
 <ul>
 <li>Considered creating another MFE invoked by the host/kernel.</li>
-<li>Problem: This could lead to shared state between MFEs, violating the principle of MFE independence.</li>
+<li>Problem: This could lead to shared state between MFEs, violating the principle (we had back then) of MFE independence.</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" data-theme="default" data-style=".columns {
@@ -334,9 +343,10 @@
 ;">
 <h1 id="refined-solution">Refined Solution</h1>
 <ul>
-<li>An MFE with a single input (browser custom event).</li>
+<li>A MFE with a single input (browser custom event).</li>
 <li>It renders in the DOM within a single element provided by each invoking MFE.</li>
-<li>It communicates results via a predefined browser custom events</li>
+<li>It communicates results via predefined browser custom events</li>
+<li>It removes itself from the DOM upon completion</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" data-theme="default" data-style=".columns {
@@ -375,7 +385,7 @@
 <h1 id="result">Result</h1>
 <ul>
 <li>The blackbox can be invoked by any MFE and front end languages.</li>
-<li>It independently renders and deletes itself in/from the DOM.</li>
+<li>It independently renders and deletes itself from the DOM.</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-paginate="true" data-theme="default" data-style=".columns {
@@ -529,8 +539,12 @@
 ;">
 <h1 id="cons-of-the-blackbox-pattern">Cons of the Blackbox Pattern</h1>
 <ul>
-<li>Dependencies might be loaded twice when the same technology is used by the blackbox and the invoking MFE.</li>
+<li>Dependencies might be loaded twice when the same technology is used by the blackbox and the invoking MFE.
+<ul>
 <li>This duplication can be avoided if every MFE in the project uses the same framework, allowing shared external dependencies.</li>
+</ul>
+</li>
+<li>Implementing a blackbox for the first time could be quite a complex task</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-paginate="true" data-theme="default" data-style=".columns {
@@ -685,9 +699,9 @@
 <li>Create <code>vanilla.tsx</code>.</li>
 <li>This file
 <ul>
-<li>creates a React renderer for vanilla JS,</li>
-<li>registers basic React's lifecycle events to window,</li>
-<li>&quot;listens&quot; to caller MFE’s ‘openBlackbox’ custom event.</li>
+<li>creates a React renderer for vanilla JS</li>
+<li>registers basic React's lifecycle events to browser's <code>window</code> object,</li>
+<li><code>listens</code> to caller MFE’s ‘openBlackbox’ custom event.</li>
 </ul>
 </li>
 </ul>
@@ -727,7 +741,7 @@
 ;">
 <h1 id="creating-a-blackbox-with-react---step-4">Creating a blackbox with React - Step 4</h1>
 <ul>
-<li>Adjust <code>webpack.vanilla.config.js</code> to specify entry point and output file and location.</li>
+<li>Create <code>webpack.vanilla.config.js</code> to specify entry point and output files and location.</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-paginate="true" data-theme="default" data-style=".columns {
@@ -962,9 +976,9 @@
 <h1 id="summary">Summary</h1>
 <ul>
 <li>The blackbox pattern in Micro-Frontends provides an efficient solution to share components across different MFEs.</li>
-<li>This pattern creates a component that has minimal interaction with other MFEs and operates independently, promoting code efficiency.</li>
+<li>This pattern creates a component that has minimal interaction with other MFEs and operates completely independently.</li>
 <li>Through a step-by-step guide using React and Webpack, we demonstrated how to create such a blackbox.</li>
-<li>The blackbox pattern simplifies shared components management in the MFE architecture, offering a scalable and maintainable approach for MFE applications.</li>
+<li>The blackbox pattern simplifies shared components management in the MFE architecture.</li>
 <li><strong>You can find the code <a href="https://github.com/ngkamperlo/blackbox">here</a></strong></li>
 </ul>
 </section>

@@ -23,6 +23,9 @@ style: |
 
 ---
 
+<div class="columns">
+<div>
+
 ## Naim Gkamperlo
 ### Associate Director of Engineering<br>**GWI**</br>
 
@@ -30,6 +33,17 @@ style: |
 <i class="fa-brands fa-linkedin"></i> LinkedIn: [https://linkedin.com/in/ngkamperlo](https://linkedin.com/in/ngkamperlo)
 <i class="fa fa-window-maximize"></i> Blog: [https://medium.com/ngkamperlo](https://medium.com/ngkamperlo)
 <i class="fa-brands fa-github"></i> GitHub: [https://github.com/ngkamperlo](https://github.com/ngkamperlo)
+</div>
+
+<div>
+
+[Github repo](https://github.com/ngkamperlo/blackbox)
+![Image](./img/presentation.png)
+
+</div>
+</div>
+
+
 
 ---
 
@@ -49,12 +63,14 @@ style: |
 
 # The Problem
 
-- MFEs require reusable components across different MFEs.
+- Need for reusable components across different MFEs.
 - The common practice is to restrict communication between MFEs as much as possible.
-- The above results in not fulfilling all product requirements.
+- The above resulted in inability to fulfill all product requirements.
 - Our specific need in GWI: 
-  - a small enough and complex enough component tied with a UI which can
-  - be utilized across multiple MFEs regardless of their tech stack
+  - a small enough and complex enough component 
+  - tied with a UI which can
+  - be utilized across multiple MFEs 
+  - regardless of their tech stack
 
 ---
 
@@ -77,22 +93,23 @@ style: |
 # Initial Solution
 
 - Considered creating another MFE invoked by the host/kernel.
-- Problem: This could lead to shared state between MFEs, violating the principle of MFE independence.
+- Problem: This could lead to shared state between MFEs, violating the principle (we had back then) of MFE independence.
 
 ---
 
 # Refined Solution
 
-- An MFE with a single input (browser custom event).
+- A MFE with a single input (browser custom event).
 - It renders in the DOM within a single element provided by each invoking MFE.
-- It communicates results via a predefined browser custom events
+- It communicates results via predefined browser custom events
+- It removes itself from the DOM upon completion
 
 ---
 
 # Result
 
 - The blackbox can be invoked by any MFE and front end languages.
-- It independently renders and deletes itself in/from the DOM.
+- It independently renders and deletes itself from the DOM.
 
 ---
 
@@ -120,7 +137,8 @@ style: |
 # Cons of the Blackbox Pattern
 
 - Dependencies might be loaded twice when the same technology is used by the blackbox and the invoking MFE.
-- This duplication can be avoided if every MFE in the project uses the same framework, allowing shared external dependencies.
+  - This duplication can be avoided if every MFE in the project uses the same framework, allowing shared external dependencies.
+- Implementing a blackbox for the first time could be quite a complex task
 ---
 
 # Deep-dive into Blackboxes
@@ -142,14 +160,14 @@ style: |
 
 - Create `vanilla.tsx`.
 - This file 
-  - creates a React renderer for vanilla JS, 
-  - registers basic React's lifecycle events to window,
-  - "listens" to caller MFE’s ‘openBlackbox’ custom event.
+  - creates a React renderer for vanilla JS 
+  - registers basic React's lifecycle events to browser's `window` object,
+  - `listens` to caller MFE’s ‘openBlackbox’ custom event.
 ---
 
 # Creating a blackbox with React - Step 4
 
-- Adjust `webpack.vanilla.config.js` to specify entry point and output file and location.
+- Create `webpack.vanilla.config.js` to specify entry point and output files and location.
 ---
 
 # Creating a blackbox with React - Step 5
@@ -183,9 +201,9 @@ style: |
 # Summary
 
 - The blackbox pattern in Micro-Frontends provides an efficient solution to share components across different MFEs.
-- This pattern creates a component that has minimal interaction with other MFEs and operates independently, promoting code efficiency.
+- This pattern creates a component that has minimal interaction with other MFEs and operates completely independently.
 - Through a step-by-step guide using React and Webpack, we demonstrated how to create such a blackbox.
-- The blackbox pattern simplifies shared components management in the MFE architecture, offering a scalable and maintainable approach for MFE applications.
+- The blackbox pattern simplifies shared components management in the MFE architecture.
 - **You can find the code [here](https://github.com/ngkamperlo/blackbox)**
 
 
