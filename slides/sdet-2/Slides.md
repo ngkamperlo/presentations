@@ -18,6 +18,10 @@ style: |
   .fa-th-large {
     color: blue;
   }
+  .qrcode {
+    width: 150px;
+    height: 150px;
+  }
 
   @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
 
@@ -36,10 +40,11 @@ style: |
 </div>
 
 <div>
+<div class="qrcode">
 
-[Github repo](https://github.com/ngkamperlo/blackbox)
 ![Image](./img/presentation.png)
 
+</div>
 </div>
 </div>
 
