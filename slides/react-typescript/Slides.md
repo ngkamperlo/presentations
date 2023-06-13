@@ -2,7 +2,6 @@
 marp: true
 html: true
 theme: default
-paginate: true
 style: |
   .columns {
     display: grid;
@@ -25,34 +24,7 @@ style: |
 
   @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
 
----
 
-## Naim Gkamperlo
-### Associate Director of Engineering<br>**GWI**</br>
-
-<i class="fa-brands fa-twitter"></i> Twitter: @ngkamperlo
-<i class="fa-brands fa-linkedin"></i> LinkedIn: [https://linkedin.com/in/ngkamperlo](https://linkedin.com/in/ngkamperlo)
-<i class="fa fa-window-maximize"></i> Blog: [https://medium.com/ngkamperlo](https://medium.com/ngkamperlo)
-<i class="fa-brands fa-github"></i> GitHub: [https://github.com/ngkamperlo](https://github.com/ngkamperlo)
-
-
-
-
----
-# Typescript and React foundations
-
---- 
-
-# Introduction to Typescript 
-
----
-
-Here are the requested slides on TypeScript foundations, written in Marp markdown. Please note that Marp doesn't directly support including interactive code examples. If you're using a platform that supports embedded code snippets, you might want to replace the code text with actual embeds:
-
-```markdown
-
----
-theme: default
 ---
 
 # TypeScript Foundations
@@ -214,19 +186,7 @@ function error(message: string): never {
     throw new Error(message);
 }
 ```
-
---- 
-# Interfaces
-One of TypeScript’s core principles is that type checking focuses on the shape that values have.
-
-```typescript
-
-interface LabelledValue {
-    label: string;
-}
-```
-
---- 
+---
 # Function Types
 Interfaces can also describe function types.
 
@@ -257,18 +217,6 @@ class Greeter {
 --- 
 # Public, private, and protected modifiers
 Each member is public by default. You can also mark members as private or protected.
-
-
---- 
-# Generics
-Generics allow you to define the type of a variable at a future point.
-
-```typescript
-
-function identity<T>(arg: T): T {
-    return arg;
-}
-```
 
 --- 
 # Union Types
@@ -353,17 +301,6 @@ interface Config {
 ```
 ---
 
-# Indexable Types
-You can also define indexable types
-
-```typescript
-
-interface StringArray {
-  [index: number]: string;
-}
-```
----
-
 # Extending Interfaces
 Interfaces can be extended
 
@@ -396,24 +333,6 @@ function loggingIdentity<T>(arg: T[]): T[] {
 ```
 ---
 
-# Generic Types
-```typescript
-
-let myIdentity: <T>(arg: T) => T = identity;
-```
----
-
-# Generic Classes
-```typescript
-
-class GenericNumber<T> {
-  zeroValue: T;
-  add: (x: T, y: T) => T;
-}
-```
-
----
-
 # Decorators
 Decorators provide a way to add both annotations and a meta-programming syntax for class declarations and members
 
@@ -424,18 +343,6 @@ function sealed(target) {
   Object.seal(target.prototype);
 }
 ```
----
-
-# Decorator Factories
-```typescript
-
-function color(value: string) {
-  return function (target) {
-    // logic
-  }
-}
-```
-
 ---
 
 # Modules
@@ -456,6 +363,10 @@ export interface StringValidator {
   isAcceptable(s: string): boolean;
 }
 ```
+and in another file in the same folder
+```typescript
+import { ZipCodeValidator } from './ZipCodeValidator'
+```
 ---
 
 # Default exports
@@ -467,6 +378,10 @@ export default class ZipCodeValidator {
   // Class logic
 }
 ```
+and in another file in the same folder
+```typescript
+import ZipCodeVal from './ZipCodeValidator'
+```
 ---
 
 # Merging Namespaces with Classes, Functions, and Enums
@@ -476,7 +391,11 @@ class Album {
   label: Album.AlbumLabel = new Album.AlbumLabel();
 }
 namespace Album {
-  export class AlbumLabel { }
+  export class AlbumLabel { 
+    .
+    .
+    .
+  }
 }
 ```
 ---
@@ -491,8 +410,8 @@ interface Todo {
   description: string;
 }
 
-function updateTodo(todo: Todo, fieldsToUpdate: Partial<Todo>) {
-  // Logic
+function updateTodoDescription(todo: Todo, fieldsToUpdate: Partial<Todo>) {
+  todo.description = fieldsToUpdate.description;
 }
 ```
 ---
@@ -531,162 +450,33 @@ declare module "lodash" {
 ```
 
 ---
-## Introduction to **React**
+# Introduction to **React**
 - JavaScript library for building user interfaces
 - Developed by Facebook
 - Component-based architecture
 ---
-## Why use React?
+# Why use React?
 - Declarative: Make your code more predictable and easier to debug
 - Component-Based: Encapsulated components that manage their own state
 - Learn Once, Write Anywhere: You can develop new features without rewriting existing code
 ---
-## React + TypeScript
-- Benefits of combining React with TypeScript
-- Strong typing and reduced runtime bugs
-- Improved developer experience
----
-## Using React foundations to build practical web applications
-- Understanding the basic building blocks
-- Setting up a new React project with TypeScript
-- Exploring the file structure
----
-## Create your first React component
-- Understanding JSX
-- How to define and use components
-- Props and state
----
-## Component Lifecycle
-- Understanding the component lifecycle
-- Mounting, Updating, Unmounting phases
----
-## React Hooks
-- Introduction to Hooks
-- useState and useEffect
-- Custom Hooks
----
-## Designing class components and stateful function components
-- Class components vs function components
-- Understanding 'state' in class and function components
-- Handling events
----
-## Using TypeScript with Class Components
-- Defining Props and State types
-- Using TypeScript specific features in class components
----
-## Using TypeScript with Function Components
-- Defining Props types
-- Using TypeScript specific features in function components
----
-## Designing one-way flow data and behavior
-- Understanding 'props' and state
-- Understanding 'lift state up'
-- Introduction to Context API
----
-## Data flow in React
-- Parent to child component data flow
-- Child to parent data flow
-- Sibling components data flow
----
-## React Context API
-- Using Context API for global state management
-- Creating a context
-- Providing and consuming a context
----
-## Using TypeScript with Context API
-- Defining Context type
-- Using TypeScript specific features with Context API
----
-# Intro to Modern JavaScript Features Used with React
+# React Foundations
+React is a declarative, efficient, and flexible JavaScript library for building user interfaces.
 
----
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-# JavaScript ES6 & Beyond
-
-- New Variables: `let` & `const`
-- Arrow Functions
-- Default Parameters
-- Rest & Spread Operator
-- Destructuring Assignment
-- Modules
-
----
-
-# New Variables: `let` & `const`
-
-```
-let name = 'John';
-name = 'Jane'; // Allowed
-
-const age = 30;
-age = 31; // Error: Assignment to constant variable.
-```
---- 
-
-# Arrow Functions
-```
-const add = (a, b) => a + b;
-
-add(3, 5); // Returns 8
-```
-
---- 
-# Default Parameters
-
-```typescript
-function introduce(name = "John Doe") {
-  return `Hello, my name is ${name}`;
+function HelloWorld() {
+  return <h1>Hello, world!</h1>;
 }
 
-introduce(); // Returns "Hello, my name is John Doe"
+ReactDOM.render(<HelloWorld />, document.getElementById('root'));
 ```
---- 
-# Rest & Spread Operator
-```typescript
-// Spread
-const numbers = [1, 2, 3];
-const moreNumbers = [...numbers, 4, 5];
+---
 
-// Rest
-function sum(...args) {
-  return args.reduce((total, current) => total + current, 0);
-}
+# Core React concepts
 
-sum(1, 2, 3); // Returns 6
-```
-
---- 
-
-# Destructuring Assignment
-```typescript
-const person = {
-  name: 'John',
-  age: 30
-};
-
-const { name, age } = person;
-```
-
---- 
-# Modules
-```typescript
-// math.js
-export const add = (a, b) => a + b;
-
-// main.js
-import { add } from './math';
-
-console.log(add(1, 2)); // Outputs 3
-```
---- 
-
-# Analysis of Core React Tasks
-React Overview
-- JSX
-- Components
-- Props
-- State & Lifecycle
-- Hooks
 
 --- 
 
@@ -695,7 +485,7 @@ React Overview
 JavaScript XML (JSX) - Syntax extension for JavaScript
 Looks like HTML, but it's JavaScript
 JSX elements are treated as JavaScript expressions
-```typescript
+```tsx
 const element = <h1>Hello, world!</h1>;
 ```
 --- 
@@ -735,6 +525,9 @@ const element = <Welcome name="John" />;
 
 State - Similar to props but private and fully controlled by the component
 Lifecycle methods - special methods in the component class to run code at particular times in the process
+
+---
+
 ```typescript
 class Clock extends React.Component {
   constructor(props) {
@@ -769,7 +562,11 @@ class Clock extends React.Component {
 --- 
 
 # Hooks
-Hooks let you use state and other React features without writing a class
+Hooks let you use state and other React features without writing a class component. 
+Essentially its an addition that came with React Functional Components and introduced in **React 16.8**
+
+---
+
 ```typescript
 import React, { useState } from 'react';
 
@@ -787,69 +584,522 @@ function Example() {
 }
 ```
 
---- 
-# How to Create a Rapid Feedback Development Environment
-## Rapid Feedback Development
-- Use Create React App (CRA)
-- Setup Hot Module Replacement (HMR)
-- Setup Fast Refresh
-- Use TypeScript for Type Checking
-- Automate Testing
---- 
-# Use Create React App (CRA)
-Create React App - an officially supported way to start a new React single-page application
-No build configuration
-```bash
-npx create-react-app my-app
-```
---- 
-# Setup Hot Module Replacement (HMR)
-HMR exchanges, adds, or removes modules while an application is running, without a full reload
-Speeds up the development process
-```typescript
-if (module.hot) {
-  module.hot.accept();
-}
-```
---- 
+---
+# Building Practical Web Applications
 
-# Use TypeScript for Type Checking
-TypeScript is a typed superset of JavaScript
-Helps catch errors early
-Provides autocompletion and type checking
+Use React components to build complex UIs from small, isolated pieces of code called "components".
+
+```jsx
+import React from 'react';
+
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+function App() {
+  return <Welcome name="Sara" />;
+}
+
+export default App;
+```
+---
+# Designing Class Components
+Class components in React are useful when your component needs to hold its own state values or use lifecycle methods.
+
+```jsx
+import React, { Component } from 'react';
+
+class Welcome extends Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+
+export default Welcome;
+```
+--- 
+# Class Components with TypeScript
+TypeScript can be used with React to ensure type safety in your React code.
+
 ```tsx
-type Props = {
-  name: string;
-};
+import React, { Component } from 'react';
 
-function Greeting({ name }: Props) {
-  return <h1>Hello, {name}</h1>;
+interface Props {
+  name: string;
 }
+
+class Welcome extends Component<Props> {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+
+export default Welcome;
+```
+--- 
+# Designing Stateful Function[al] Components
+In addition to class components, React also allows the use of function components.
+
+```jsx
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+export default Counter;
 ```
 
 --- 
-# Automate Testing
-Jest and React Testing Library
-Write tests for all components to ensure they work as expected
-```typescript
-import { render, screen } from '@testing-library/react';
-import App from './App';
+# Stateful Function[al] Components with TypeScript
+TypeScript provides static types to ensure type safety in your React function components.
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+```tsx
+import React, { useState } from 'react';
+
+const Counter: React.FC = () => {
+  const [count, setCount] = useState<number>(0);
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+export default Counter;
 ```
+--- 
+# Designing One-Way Data Flow
+In React, state and props flow down the component hierarchy.
 
+```jsx
+import React from 'react';
+
+function ParentComponent() {
+  return <ChildComponent name="Sara" />;
+}
+
+function ChildComponent(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+
+export default ParentComponent;
+```
+--- 
+# One-Way Data Flow with TypeScript
+Use TypeScript with React to ensure type safety in one-way data flow.
+
+```tsx
+import React from 'react';
+
+interface ChildProps {
+  name: string;
+}
+
+const ParentComponent: React.FC = () => {
+  return <ChildComponent name="Sara" />;
+}
+
+const ChildComponent: React.FC<ChildProps> = (props) => {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+export default ParentComponent;
+```
+--- 
+# Modern JavaScript Features Used With React
+Understanding modern JavaScript features such as 
+- new var: `let` & `const`
+- rest and spread operator
+- destructuring 
+- arrow functions 
+- default Parameters
+- modules
+can help write better React code.
 
 ---
 
-# Thank You! 🤘
-# Naim Gkamperlo
+# New Variables: `let` & `const`
 
-<i class="fa-brands fa-twitter"></i> Twitter: @ngkamperlo
-<i class="fa-brands fa-linkedin"></i> LinkedIn: [https://linkedin.com/in/ngkamperlo](https://linkedin.com/in/ngkamperlo)
-<i class="fa fa-window-maximize"></i> Blog: [https://medium.com/ngkamperlo](https://medium.com/ngkamperlo)
-<i class="fa-brands fa-github"></i> GitHub: [https://github.com/ngkamperlo](https://github.com/ngkamperlo)
+```
+let name = 'John';
+name = 'Jane'; // Allowed
 
+const age = 30;
+age = 31; // Error: Assignment to constant variable.
+```
+---
+
+# Rest & Spread Operator
+```typescript
+// Spread
+const numbers = [1, 2, 3];
+const moreNumbers = [...numbers, 4, 5];
+
+// Rest
+function sum(...args) {
+  return args.reduce((total, current) => total + current, 0);
+}
+
+sum(1, 2, 3); // Returns 6
+```
+---
+# Destructuring
+```typescript
+const person = {
+  name: 'John',
+  age: 30
+};
+
+const { name, age } = person;
+```
+
+---
+
+# Arrow functions
+```ts
+const add = (a, b) => a + b;
+
+add(3, 5); // Returns 8
+```
+```jsx
+import React from 'react';
+
+function Welcome({ name }) {
+  return <h1>Hello, {name}</h1>;
+}
+
+const App = () => <Welcome name="Sara" />;
+
+export default App;
+```
+--- 
+# Default Parameters
+
+```typescript
+function introduce(name = "John Doe") {
+  return `Hello, my name is ${name}`;
+}
+
+introduce(); // Returns "Hello, my name is John Doe"
+```
+---
+# Modules
+```typescript
+// math.js
+export const add = (a, b) => a + b;
+
+// main.js
+import { add } from './math';
+
+console.log(add(1, 2)); // Outputs 3
+```
+--- 
+
+# Analysis of Core React Tasks
+Understanding React's core tasks such as 
+- rendering elements
+- handling events
+- and conditional rendering.
+---
+```jsx
+import React from 'react';
+
+function ToggleButton() {
+  const [isToggleOn, setToggle] = useState(true);
+
+  const handleClick = () => {
+    setToggle(!isToggleOn);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      {isToggleOn ? 'ON' : 'OFF'}
+    </button>
+  );
+}
+
+export default ToggleButton;
+```
+--- 
+# Core React Tasks with TypeScript
+TypeScript enhances React's core tasks with static type checks.
+
+```tsx
+import React, { useState } from 'react';
+
+const ToggleButton: React.FC = () => {
+  const [isToggleOn, setToggle] = useState<boolean>(true);
+
+  const handleClick = () => {
+    setToggle(!isToggleOn);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      {isToggleOn ? 'ON' : 'OFF'}
+    </button>
+  );
+}
+
+export default ToggleButton;
+```
+---
+# More Advanced Uses of TypeScript with React
+We can use TypeScript with React to define complex types, interfaces and generics.
+
+---
+```tsx
+import React, { useState } from 'react';
+
+interface CounterProps {
+  initialCount: number;
+}
+
+const Counter: React.FC<CounterProps> = ({ initialCount }) => {
+  const [count, setCount] = useState<number>(initialCount);
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+---
+
+# Best Practices for Designing Components and Managing State
+- organize components into a hierarchy
+- keep components small and focused
+- lift state up if multiple components need access to it || use a global store
+---
+```tsx
+import React, { useState } from 'react';
+
+interface CounterProps {
+  initialCount: number;
+  onCountChange: (count: number) => void;
+}
+
+const Counter: React.FC<CounterProps> = ({ initialCount, onCountChange }) => {
+  const [count, setCount] = useState<number>(initialCount);
+  
+  const handleClick = () => {
+    const newCount = count + 1;
+    setCount(newCount);
+    onCountChange(newCount);
+  };
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={handleClick}>
+        Click me
+      </button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+---
+# Exploring More of React's Core Tasks
+- understanding conditional rendering
+- list rendering
+- handling events with React
+
+```tsx
+import React, { useState } from 'react';
+
+const ListComponent: React.FC = () => {
+  const [items] = useState<Array<string>>(['Apple', 'Banana', 'Cherry']);
+
+  return (
+    <ul>
+      {items.map((item, index) => <li key={index}>{item}</li>)}
+    </ul>
+  );
+}
+
+export default ListComponent;
+```
+---
+# Deep Diving into React's Lifecycle Methods
+React's lifecycle methods give control over different phases of a component's life: 
+- mounting
+- updating
+- unmounting
+
+---
+
+```tsx
+import React, { Component } from 'react';
+
+interface Props {
+  message: string;
+}
+
+class LifecycleComponent extends Component<Props> {
+  componentDidMount() {
+    console.log('Component did mount');
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.message !== this.props.message) {
+      console.log('Component did update');
+    }
+  }
+
+  componentWillUnmount() {
+    console.log('Component will unmount');
+  }
+
+  render() {
+    return <h1>{this.props.message}</h1>;
+  }
+}
+
+export default LifecycleComponent;
+```
+---
+# Discussing Performance Optimization Techniques
+React's built-in optimizations like PureComponent and memo can be leveraged for better performance.
+
+```tsx
+import React, { memo } from 'react';
+
+interface Props {
+  message: string;
+}
+
+const MemoComponent: React.FC<Props> = memo(({ message }) => {
+  return <h1>{message}</h1>;
+});
+
+export default MemoComponent;
+```
+---
+
+# Implementing Routing
+React Router can be used to manage routing in your application.
+
+---
+
+```tsx
+import React from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+const HomePage: React.FC = () => <h1>Home Page</h1>;
+const AboutPage: React.FC = () => <h1>About Page</h1>;
+
+const App: React.FC = () => {
+  return (
+    <Router>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Route path="/" exact component={HomePage} />
+      <Route path="/about" component={AboutPage} />
+    </Router>
+  );
+}
+
+export default App;
+```
+---
+# Designing Forms and Handling Form Events
+React provides controlled components to handle form inputs and events.
+
+---
+
+```tsx
+import React, { useState } from 'react';
+
+const FormComponent: React.FC = () => {
+  const [name, setName] = useState<string>('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    alert(`Submitted name: ${name}`);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input type="text" value={name} onChange={handleChange} />
+      </label>
+      <input type="submit" value="Submit" />
+    </form>
+  );
+}
+
+export default FormComponent;
+```
+---
+# Using External Libraries and APIs with React and TypeScript
+You can use external libraries like Axios for making HTTP requests and integrate APIs into your React application.
+
+--- 
+
+```tsx
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const UserComponent: React.FC = () => {
+  const [users, setUsers] = useState<Array<User>>([]);
+
+  useEffect(() => {
+    axios.get('https://jsonplaceholder.typicode.com/users')
+      .then(response => setUsers(response.data))
+      .catch(error => console.error(error));
+  }, []);
+
+  return (
+    <ul>
+      {users.map(user => (
+        <li key={user.id}>{user.name} ({user.email})</li>
+      ))}
+    </ul>
+  );
+}
+
+export default UserComponent;
+```
+
+--- 
+Thank you 🤘
