@@ -627,8 +627,6 @@ class Welcome extends Component<WelcomeProps> {
 export default Welcome;
 ```
 --- 
-
---- 
 # Stateful Function[al] Components with TypeScript
 TypeScript provides static types to ensure type safety in your React function components.
 
