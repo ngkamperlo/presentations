@@ -1601,11 +1601,13 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
 
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
 ;">
-<h1 id="modules">Modules</h1>
-<p>Modules are executed within their own scope, not in the global scope</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript">
-<span class="hljs-keyword">import</span> { <span class="hljs-title class_">ZipCodeValidator</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./ZipCodeValidator&quot;</span>;
-</code></pre>
+<h1 id="sealed-example">Sealed example</h1>
+<p>The code above does the following:</p>
+<ol>
+<li>The @sealed decorator applies Object.seal to the constructor and the prototype of the Greeter class.</li>
+<li>Object.seal prevents adding or deleting properties to an object. It also marks all existing properties as non-configurable. Values of present properties can still be changed as long as they are writable.</li>
+<li>It can be used in the following manner</li>
+</ol>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="34" data-theme="default" data-style=".columns {
   display: grid;
@@ -1648,15 +1650,16 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
 
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
 ;">
-<h1 id="export">Export</h1>
-<p>Exporting a declaration</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript">
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">StringValidator</span> {
-  <span class="hljs-title function_">isAcceptable</span>(<span class="hljs-attr">s</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">boolean</span>;
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-ts"><span class="hljs-meta">@sealed</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Greeter</span> {
+    <span class="hljs-attr">greeting</span>: <span class="hljs-built_in">string</span>;
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">message: <span class="hljs-built_in">string</span></span>) {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">greeting</span> = message;
+    }
+    <span class="hljs-title function_">greet</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello, &quot;</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">greeting</span>;
+    }
 }
-</code></pre>
-<p>and in another file in the same folder</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ZipCodeValidator</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./ZipCodeValidator&#x27;</span>
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="35" data-theme="default" data-style=".columns {
@@ -1700,15 +1703,9 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
 
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
 ;">
-<h1 id="default-exports">Default exports</h1>
-<p>Each module can optionally export a default export</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript">
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ZipCodeValidator</span> {
-  <span class="hljs-comment">// Class logic</span>
-}
-</code></pre>
-<p>and in another file in the same folder</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">ZipCodeVal</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./ZipCodeValidator&#x27;</span>
+<h1 id="modules">Modules</h1>
+<p>Modules are executed within their own scope, not in the global scope</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ZipCodeValidator</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./ZipCodeValidator&quot;</span>;
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="36" data-theme="default" data-style=".columns {
@@ -1752,18 +1749,14 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
 
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
 ;">
-<h1 id="merging-namespaces-with-classes-functions-and-enums">Merging Namespaces with Classes, Functions, and Enums</h1>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript">
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Album</span> {
-  <span class="hljs-attr">label</span>: <span class="hljs-title class_">Album</span>.<span class="hljs-property">AlbumLabel</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Album</span>.<span class="hljs-title class_">AlbumLabel</span>();
+<h1 id="export">Export</h1>
+<p>Exporting a declaration</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ZipCodeValidator</span> {
+  <span class="hljs-title function_">isAcceptable</span>(<span class="hljs-attr">s</span>: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">boolean</span>;
 }
-<span class="hljs-keyword">namespace</span> <span class="hljs-title class_">Album</span> {
-  <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AlbumLabel</span> { 
-    .
-    .
-    .
-  }
-}
+</code></pre>
+<p>and as seen in previous example</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">ZipCodeValidator</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./ZipCodeValidator&#x27;</span>
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="37" data-theme="default" data-style=".columns {
@@ -1807,10 +1800,115 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
 
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
 ;">
+<h1 id="default-exports">Default exports</h1>
+<p>Each module can optionally export a default export</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ZipCodeValidator</span> {
+  <span class="hljs-comment">// Class logic</span>
+}
+</code></pre>
+<p>and in another file in the same folder</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">ZipCodeArubaBahamaJamaica</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./ZipCodeValidator&#x27;</span>
+</code></pre>
+<p><em>Disclaimer</em>: When importing default exported variable you can name it as you'd like</p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="38" data-theme="default" data-style=".columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+" style="--theme:default;--style:.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+;">
+<h1 id="merging-namespaces-with-classes-functions-and-enums">Merging Namespaces with Classes, Functions, and Enums</h1>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript"><span class="hljs-keyword">namespace</span> <span class="hljs-title class_">Album</span> {
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AlbumLabel</span> { 
+    .
+    .
+    .
+  }
+}
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Album</span> {
+  <span class="hljs-attr">label</span>: <span class="hljs-title class_">Album</span>.<span class="hljs-property">AlbumLabel</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Album</span>.<span class="hljs-title class_">AlbumLabel</span>();
+}
+</code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="39" data-theme="default" data-style=".columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+" style="--theme:default;--style:.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+;">
 <h1 id="advanced-types">Advanced Types</h1>
 <p>Partial Types</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript">
-<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Todo</span> {
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Todo</span> {
   <span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span>;
   <span class="hljs-attr">description</span>: <span class="hljs-built_in">string</span>;
 }
@@ -1820,7 +1918,7 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
 }
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="38" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="40" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -1871,7 +1969,7 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
   <span class="hljs-string">&quot;object&quot;</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="39" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="41" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -1918,7 +2016,7 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
 <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> <span class="hljs-title class_">Lodash</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;lodash&quot;</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="40" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="42" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -1969,7 +2067,50 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
 }
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="41" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="43" data-theme="default" data-style=".columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+" style="--theme:default;--style:.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+;">
+<h1 id="react"><strong>React</strong></h1>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="44" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2013,11 +2154,11 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
 <h1 id="introduction-to-react">Introduction to <strong>React</strong></h1>
 <ul>
 <li>JavaScript library for building user interfaces</li>
-<li>Developed by Facebook</li>
+<li>Developed by Facebook - 1st release <em>May 29th, 2013</em></li>
 <li>Component-based architecture</li>
 </ul>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="42" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="45" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2065,7 +2206,50 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
 <li>Learn Once, Write Anywhere: You can develop new features without rewriting existing code</li>
 </ul>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="43" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="46" data-theme="default" data-style=".columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+" style="--theme:default;--style:.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+;">
+<p><img src="./img/components.png" alt="Image" /></p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="47" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2107,7 +2291,7 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
 ;">
 <h1 id="react-foundations">React Foundations</h1>
-<p>React is a declarative, efficient, and flexible JavaScript library for building user interfaces.</p>
+<p>React Hello World!</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-title class_">ReactDOM</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-dom&#x27;</span>;
 
@@ -2118,7 +2302,7 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
 <span class="hljs-title class_">ReactDOM</span>.<span class="hljs-title function_">render</span>(<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">HelloWorld</span> /&gt;</span></span>, <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;root&#x27;</span>));
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="44" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="48" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2161,7 +2345,7 @@ notSure = <span class="hljs-literal">false</span>; <span class="hljs-comment">//
 ;">
 <h1 id="core-react-concepts">Core React concepts</h1>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="45" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="49" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2209,7 +2393,7 @@ JSX elements are treated as JavaScript expressions</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-tsx"><span class="hljs-keyword">const</span> element = <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, world!<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="46" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="50" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2266,7 +2450,7 @@ Two types of components: Functional and Class components</p>
 }
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="47" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="51" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2308,7 +2492,10 @@ Two types of components: Functional and Class components</p>
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
 ;">
 <h1 id="props">Props</h1>
-<p>Properties (props) - way to pass data from parent to child components</p>
+<p><em>props (which stands for properties - no shit Sherlock <img class="emoji" draggable="false" alt="🧐" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f9d0.svg" data-marp-twemoji=""/><img class="emoji" draggable="false" alt="😂" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/1f602.svg" data-marp-twemoji=""/>)</em></p>
+<ul>
+<li>way to pass data from parent to child components</li>
+</ul>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Welcome</span>(<span class="hljs-params">props</span>) {
   <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, {props.name}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>;
 }
@@ -2316,7 +2503,7 @@ Two types of components: Functional and Class components</p>
 <span class="hljs-keyword">const</span> element = <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Welcome</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;John&quot;</span> /&gt;</span></span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="48" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="52" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2359,9 +2546,9 @@ Two types of components: Functional and Class components</p>
 ;">
 <h1 id="state--lifecycle">State &amp; Lifecycle</h1>
 <p>State - Similar to props but private and fully controlled by the component<br />
-Lifecycle methods - special methods in the component class to run code at particular times in the process</p>
+Lifecycle methods - special methods in the component level to run code at particular times in the process</p>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="49" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="53" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2432,7 +2619,7 @@ Lifecycle methods - special methods in the component class to run code at partic
 }
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="50" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="54" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2477,7 +2664,7 @@ Lifecycle methods - special methods in the component class to run code at partic
 <p>Hooks let you use state and other React features without writing a class component.<br />
 Essentially its an addition that came with React Functional Components and introduced in <strong>React 16.8</strong></p>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="51" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="55" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2534,117 +2721,7 @@ Essentially its an addition that came with React Functional Components and intro
 }
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="52" data-theme="default" data-style=".columns {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-.vert {
-  vertical-align: middle
-}
-.fa-twitter { color: aqua; }
-.fa-linkedin { color: blue; }
-.fa-window-maximize { color: skyblue; }
-.fa-th-large {
-  color: blue;
-}
-.qrcode {
-  width: 150px;
-  height: 150px;
-}
-
-@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
-" style="--theme:default;--style:.columns {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-.vert {
-  vertical-align: middle
-}
-.fa-twitter { color: aqua; }
-.fa-linkedin { color: blue; }
-.fa-window-maximize { color: skyblue; }
-.fa-th-large {
-  color: blue;
-}
-.qrcode {
-  width: 150px;
-  height: 150px;
-}
-
-@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
-;">
-<h1 id="building-practical-web-applications">Building Practical Web Applications</h1>
-<p>Use React components to build complex UIs from small, isolated pieces of code called &quot;components&quot;.</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
-
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">Welcome</span>(<span class="hljs-params">props</span>) {
-  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, {props.name}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>;
-}
-
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">App</span>(<span class="hljs-params"></span>) {
-  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Welcome</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Sara&quot;</span> /&gt;</span></span>;
-}
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">App</span>;
-</code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="53" data-theme="default" data-style=".columns {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-.vert {
-  vertical-align: middle
-}
-.fa-twitter { color: aqua; }
-.fa-linkedin { color: blue; }
-.fa-window-maximize { color: skyblue; }
-.fa-th-large {
-  color: blue;
-}
-.qrcode {
-  width: 150px;
-  height: 150px;
-}
-
-@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
-" style="--theme:default;--style:.columns {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-.vert {
-  vertical-align: middle
-}
-.fa-twitter { color: aqua; }
-.fa-linkedin { color: blue; }
-.fa-window-maximize { color: skyblue; }
-.fa-th-large {
-  color: blue;
-}
-.qrcode {
-  width: 150px;
-  height: 150px;
-}
-
-@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
-;">
-<h1 id="designing-class-components">Designing Class Components</h1>
-<p>Class components in React are useful when your component needs to hold its own state values or use lifecycle methods.</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { <span class="hljs-title class_">Component</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Welcome</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> {
-  <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
-    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, {this.props.name}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>;
-  }
-}
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Welcome</span>;
-</code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="54" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="56" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2689,11 +2766,11 @@ Essentially its an addition that came with React Functional Components and intro
 <p>TypeScript can be used with React to ensure type safety in your React code.</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-tsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { <span class="hljs-title class_">Component</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
-<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Props</span> {
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">WelcomeProps</span> {
   <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;
 }
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Welcome</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span>&lt;<span class="hljs-title class_">Props</span>&gt; {
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Welcome</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span>&lt;<span class="hljs-title class_">WelcomeProps</span>&gt; {
   <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) {
     <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, {this.props.name}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>;
   }
@@ -2702,7 +2779,7 @@ Essentially its an addition that came with React Functional Components and intro
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Welcome</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="55" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="57" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2742,27 +2819,8 @@ Essentially its an addition that came with React Functional Components and intro
 }
 
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
-;">
-<h1 id="designing-stateful-functional-components">Designing Stateful Function[al] Components</h1>
-<p>In addition to class components, React also allows the use of function components.</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
-
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">Counter</span>(<span class="hljs-params"></span>) {
-  <span class="hljs-keyword">const</span> [count, setCount] = <span class="hljs-title function_">useState</span>(<span class="hljs-number">0</span>);
-  <span class="hljs-keyword">return</span> (
-    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>You clicked {count} times<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setCount(count + 1)}&gt;
-        Click me
-      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-  );
-}
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Counter</span>;
-</code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="56" data-theme="default" data-style=".columns {
+;"></section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="58" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2822,64 +2880,7 @@ Essentially its an addition that came with React Functional Components and intro
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Counter</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="57" data-theme="default" data-style=".columns {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-.vert {
-  vertical-align: middle
-}
-.fa-twitter { color: aqua; }
-.fa-linkedin { color: blue; }
-.fa-window-maximize { color: skyblue; }
-.fa-th-large {
-  color: blue;
-}
-.qrcode {
-  width: 150px;
-  height: 150px;
-}
-
-@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
-" style="--theme:default;--style:.columns {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-.vert {
-  vertical-align: middle
-}
-.fa-twitter { color: aqua; }
-.fa-linkedin { color: blue; }
-.fa-window-maximize { color: skyblue; }
-.fa-th-large {
-  color: blue;
-}
-.qrcode {
-  width: 150px;
-  height: 150px;
-}
-
-@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
-;">
-<h1 id="designing-one-way-data-flow">Designing One-Way Data Flow</h1>
-<p>In React, state and props flow down the component hierarchy.</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-jsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
-
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">ParentComponent</span>(<span class="hljs-params"></span>) {
-  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ChildComponent</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Sara&quot;</span> /&gt;</span></span>;
-}
-
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">ChildComponent</span>(<span class="hljs-params">props</span>) {
-  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, {props.name}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>;
-}
-
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">ParentComponent</span>;
-</code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="58" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="59" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2928,18 +2929,18 @@ Essentially its an addition that came with React Functional Components and intro
   <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;
 }
 
-<span class="hljs-keyword">const</span> <span class="hljs-title class_">ParentComponent</span>: <span class="hljs-title class_">React</span>.<span class="hljs-property">FC</span> = <span class="hljs-function">() =&gt;</span> {
-  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ChildComponent</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Sara&quot;</span> /&gt;</span></span>;
-}
-
 <span class="hljs-keyword">const</span> <span class="hljs-title class_">ChildComponent</span>: <span class="hljs-title class_">React</span>.<span class="hljs-property">FC</span>&lt;<span class="hljs-title class_">ChildProps</span>&gt; = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
   <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, {props.name}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>;
+}
+
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">ParentComponent</span>: <span class="hljs-title class_">React</span>.<span class="hljs-property">FC</span> = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ChildComponent</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Sara&quot;</span> /&gt;</span></span>;
 }
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">ParentComponent</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="59" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="60" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -2987,12 +2988,14 @@ Essentially its an addition that came with React Functional Components and intro
 <li>rest and spread operator</li>
 <li>destructuring</li>
 <li>arrow functions</li>
-<li>default Parameters</li>
-<li>modules<br />
+<li>default parameters</li>
+<li>modules</li>
+<li>ternary operator</li>
+<li>null coalescing<br />
 can help write better React code.</li>
 </ul>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="60" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="61" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3034,14 +3037,14 @@ can help write better React code.</li>
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
 ;">
 <h1 id="new-variables-let--const">New Variables: <code>let</code> &amp; <code>const</code></h1>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code>let name = 'John';
-name = 'Jane'; // Allowed
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-ts"><span class="hljs-keyword">let</span> name = <span class="hljs-string">&#x27;John&#x27;</span>;
+name = <span class="hljs-string">&#x27;Jane&#x27;</span>; <span class="hljs-comment">// Allowed</span>
 
-const age = 30;
-age = 31; // Error: Assignment to constant variable.
+<span class="hljs-keyword">const</span> age = <span class="hljs-number">30</span>;
+age = <span class="hljs-number">31</span>; <span class="hljs-comment">// Error: Assignment to constant variable.</span>
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="61" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="62" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3095,7 +3098,7 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-title function_">sum</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>); <span class="hljs-comment">// Returns 6</span>
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="62" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="63" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3138,14 +3141,15 @@ age = 31; // Error: Assignment to constant variable.
 ;">
 <h1 id="destructuring">Destructuring</h1>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript"><span class="hljs-keyword">const</span> person = {
-  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;John&#x27;</span>,
+  <span class="hljs-attr">firstName</span>: <span class="hljs-string">&#x27;John&#x27;</span>,
+  <span class="hljs-attr">lastName</span>: <span class="hljs-string">&#x27;Taramas&#x27;</span>,
   <span class="hljs-attr">age</span>: <span class="hljs-number">30</span>
 };
 
-<span class="hljs-keyword">const</span> { name, age } = person;
+<span class="hljs-keyword">const</span> { firstName, age } = person;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="63" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="64" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3187,7 +3191,9 @@ age = 31; // Error: Assignment to constant variable.
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
 ;">
 <h1 id="arrow-functions">Arrow functions</h1>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-ts"><span class="hljs-keyword">const</span> <span class="hljs-title function_">add</span> = (<span class="hljs-params">a, b</span>) =&gt; a + b;
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-ts"><span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">a, b</span>) {<span class="hljs-keyword">return</span> a + b};
+<span class="hljs-comment">// is the same as</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">add</span> = (<span class="hljs-params">a, b</span>) =&gt; a + b;
 
 <span class="hljs-title function_">add</span>(<span class="hljs-number">3</span>, <span class="hljs-number">5</span>); <span class="hljs-comment">// Returns 8</span>
 </code></pre>
@@ -3202,7 +3208,7 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">App</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="64" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="65" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3251,7 +3257,7 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-title function_">introduce</span>(); <span class="hljs-comment">// Returns &quot;Hello, my name is John Doe&quot;</span>
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="65" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="66" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3302,7 +3308,103 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">add</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)); <span class="hljs-comment">// Outputs 3</span>
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="66" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="67" data-theme="default" data-style=".columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+" style="--theme:default;--style:.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+;">
+<h1 id="ternary-operator">Ternary operator</h1>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript"><span class="hljs-keyword">const</span> x = <span class="hljs-number">10</span>;
+<span class="hljs-keyword">const</span> y = <span class="hljs-number">20</span>;
+<span class="hljs-keyword">const</span> z = x &gt; y ? x : y;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(z); <span class="hljs-comment">// Outputs 20</span>
+</code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="68" data-theme="default" data-style=".columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+" style="--theme:default;--style:.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+;">
+<h1 id="null-coalescing-operator">Null coalescing operator</h1>
+<p>Null coalescing operator (??) is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-typescript"><span class="hljs-keyword">const</span> foo = <span class="hljs-literal">null</span> ?? <span class="hljs-string">&#x27;default string&#x27;</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(foo);
+<span class="hljs-comment">// expected output: &quot;default string&quot;</span>
+</code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="69" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3351,7 +3453,7 @@ age = 31; // Error: Assignment to constant variable.
 <li>and conditional rendering.</li>
 </ul>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="67" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="70" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3401,8 +3503,11 @@ age = 31; // Error: Assignment to constant variable.
     <span class="hljs-title function_">setToggle</span>(!isToggleOn);
   }
 
+  <span class="hljs-comment">//rendering element</span>
   <span class="hljs-keyword">return</span> (
+    <span class="hljs-comment">//handling events</span>
     <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleClick}</span>&gt;</span>
+      //conditional rendering
       {isToggleOn ? &#x27;ON&#x27; : &#x27;OFF&#x27;}
     <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
   );
@@ -3411,7 +3516,7 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">ToggleButton</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="68" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="71" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3457,14 +3562,18 @@ age = 31; // Error: Assignment to constant variable.
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-tsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
 <span class="hljs-keyword">const</span> <span class="hljs-title class_">ToggleButton</span>: <span class="hljs-title class_">React</span>.<span class="hljs-property">FC</span> = <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-comment">//static type check of isToggleOn type of value (boolean)</span>
   <span class="hljs-keyword">const</span> [isToggleOn, setToggle] = useState&lt;<span class="hljs-built_in">boolean</span>&gt;(<span class="hljs-literal">true</span>);
 
   <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleClick</span> = (<span class="hljs-params"></span>) =&gt; {
     <span class="hljs-title function_">setToggle</span>(!isToggleOn);
   }
 
+  <span class="hljs-comment">//rendering element</span>
   <span class="hljs-keyword">return</span> (
+    <span class="hljs-comment">//handling events</span>
     <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleClick}</span>&gt;</span>
+      //conditional rendering
       {isToggleOn ? &#x27;ON&#x27; : &#x27;OFF&#x27;}
     <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
   );
@@ -3473,7 +3582,7 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">ToggleButton</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="69" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="72" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3517,7 +3626,7 @@ age = 31; // Error: Assignment to constant variable.
 <h1 id="more-advanced-uses-of-typescript-with-react">More Advanced Uses of TypeScript with React</h1>
 <p>We can use TypeScript with React to define complex types, interfaces and generics.</p>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="70" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="73" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3560,13 +3669,16 @@ age = 31; // Error: Assignment to constant variable.
 ;">
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-tsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
+<span class="hljs-comment">//interfaces</span>
 <span class="hljs-keyword">interface</span> <span class="hljs-title class_">CounterProps</span> {
   <span class="hljs-attr">initialCount</span>: <span class="hljs-built_in">number</span>;
 }
 
+<span class="hljs-comment">//generics</span>
 <span class="hljs-keyword">const</span> <span class="hljs-title class_">Counter</span>: <span class="hljs-title class_">React</span>.<span class="hljs-property">FC</span>&lt;<span class="hljs-title class_">CounterProps</span>&gt; = <span class="hljs-function">(<span class="hljs-params">{ initialCount }</span>) =&gt;</span> {
   <span class="hljs-keyword">const</span> [count, setCount] = useState&lt;<span class="hljs-built_in">number</span>&gt;(initialCount);
   <span class="hljs-keyword">return</span> (
+    <span class="hljs-comment">//complex return types</span>
     <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>You clicked {count} times<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setCount(count + 1)}&gt;
@@ -3579,7 +3691,7 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Counter</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="71" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="74" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3627,7 +3739,7 @@ age = 31; // Error: Assignment to constant variable.
 <li>lift state up if multiple components need access to it || use a global store</li>
 </ul>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="72" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="75" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3697,7 +3809,7 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">Counter</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="73" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="76" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3740,9 +3852,7 @@ age = 31; // Error: Assignment to constant variable.
 ;">
 <h1 id="exploring-more-of-reacts-core-tasks">Exploring More of React's Core Tasks</h1>
 <ul>
-<li>understanding conditional rendering</li>
 <li>list rendering</li>
-<li>handling events with React</li>
 </ul>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-tsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 
@@ -3751,7 +3861,7 @@ age = 31; // Error: Assignment to constant variable.
 
   <span class="hljs-keyword">return</span> (
     <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
-      {items.map((item, index) =&gt; <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{index}</span>&gt;</span>{item}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>)}
+      {items.map((item: string, index: number) =&gt; <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{index}</span>&gt;</span>{item}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>)}
     <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span>
   );
 }
@@ -3759,7 +3869,140 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">ListComponent</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="74" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="77" data-theme="default" data-style=".columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+" style="--theme:default;--style:.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+;">
+<h1 id="exploring-more-of-reacts-core-tasks-1">Exploring More of React's Core Tasks</h1>
+<ul>
+<li>handling events with React</li>
+</ul>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-tsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">TextWithParagraphComponentProps</span> {
+  <span class="hljs-attr">initialText</span>: <span class="hljs-built_in">string</span>;
+}
+
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">TextWithParagraphComponent</span>: <span class="hljs-title class_">React</span>.<span class="hljs-property">FC</span>&lt;<span class="hljs-title class_">TextWithParagraphComponentProps</span>&gt; = <span class="hljs-function">(<span class="hljs-params">{ initialText }</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> [text, setText] = useState&lt;<span class="hljs-built_in">string</span>&gt;(initialText);
+
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleChange</span> = (<span class="hljs-params">event: React.ChangeEvent&lt;HTMLInputElement&gt;</span>) =&gt; {
+    <span class="hljs-title function_">setText</span>(event.<span class="hljs-property">target</span>.<span class="hljs-property">value</span>);
+  };
+
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{text}</span> <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleChange}</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{text}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">TextWithParagraph</span>;
+
+</code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="78" data-theme="default" data-style=".columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+" style="--theme:default;--style:.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+;">
+<h1 id="exploring-more-of-reacts-core-tasks-2">Exploring More of React's Core Tasks</h1>
+<ul>
+<li>conditional rendering</li>
+</ul>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-tsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">ListComponentProps</span>{
+  <span class="hljs-attr">items</span>: <span class="hljs-built_in">string</span>[];
+}
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">ListComponent</span>: <span class="hljs-title class_">React</span>.<span class="hljs-property">FC</span>&lt;<span class="hljs-title class_">ListComponentProps</span>&gt; = <span class="hljs-function">(<span class="hljs-params">{items}</span>) =&gt;</span> {
+
+  <span class="hljs-keyword">return</span> items.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span> ? (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+      {items.map((item, index) =&gt; <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{index}</span>&gt;</span>{item}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>)}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span>
+  ) : 
+  (<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>The list has no items<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>);
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">ListComponent</span>;
+</code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="79" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3808,7 +4051,7 @@ age = 31; // Error: Assignment to constant variable.
 <li>unmounting</li>
 </ul>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="75" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="80" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3878,7 +4121,74 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">LifecycleComponent</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="76" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="81" data-theme="default" data-style=".columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+" style="--theme:default;--style:.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.vert {
+  vertical-align: middle
+}
+.fa-twitter { color: aqua; }
+.fa-linkedin { color: blue; }
+.fa-window-maximize { color: skyblue; }
+.fa-th-large {
+  color: blue;
+}
+.qrcode {
+  width: 150px;
+  height: 150px;
+}
+
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+;">
+<h1 id="the-same-but-with-functional-components-and-hooks">The same but with functional components and hooks</h1>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-tsx"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+
+<span class="hljs-keyword">interface</span> <span class="hljs-title class_">Props</span> {
+  <span class="hljs-attr">message</span>: <span class="hljs-built_in">string</span>;
+}
+
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">LifecycleComponent</span>: <span class="hljs-title class_">React</span>.<span class="hljs-property">FC</span>&lt;<span class="hljs-title class_">Props</span>&gt; = <span class="hljs-function">(<span class="hljs-params">{ message }</span>) =&gt;</span> {
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Component did mount&#x27;</span>);
+    
+    <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Component will unmount&#x27;</span>);
+    };
+  }, []);
+
+  <span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Component did update&#x27;</span>);
+  }, [message]);
+
+  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{message}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>;
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">LifecycleComponent</span>;
+</code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="82" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3934,7 +4244,7 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">MemoComponent</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="77" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="83" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -3978,7 +4288,7 @@ age = 31; // Error: Assignment to constant variable.
 <h1 id="implementing-routing">Implementing Routing</h1>
 <p>React Router can be used to manage routing in your application.</p>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="78" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="84" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -4048,7 +4358,7 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">App</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="79" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="85" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -4091,8 +4401,12 @@ age = 31; // Error: Assignment to constant variable.
 ;">
 <h1 id="designing-forms-and-handling-form-events">Designing Forms and Handling Form Events</h1>
 <p>React provides controlled components to handle form inputs and events.</p>
+<ul>
+<li>React hook form</li>
+<li>Formik</li>
+</ul>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="80" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="86" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -4161,7 +4475,7 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">FormComponent</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="81" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="87" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -4205,7 +4519,7 @@ age = 31; // Error: Assignment to constant variable.
 <h1 id="using-external-libraries-and-apis-with-react-and-typescript">Using External Libraries and APIs with React and TypeScript</h1>
 <p>You can use external libraries like Axios for making HTTP requests and integrate APIs into your React application.</p>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="82" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="88" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
@@ -4276,7 +4590,7 @@ age = 31; // Error: Assignment to constant variable.
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">UserComponent</span>;
 </code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="83" data-theme="default" data-style=".columns {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="89" data-theme="default" data-style=".columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;

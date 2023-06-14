@@ -275,6 +275,7 @@ class Dog implements Animal {
   }
 }
 ```
+
 ---
 
 # Optional Properties in Interfaces
@@ -343,13 +344,32 @@ function sealed(target) {
   Object.seal(target.prototype);
 }
 ```
+
+---
+# Sealed example
+The code above does the following:
+1. The @sealed decorator applies Object.seal to the constructor and the prototype of the Greeter class.
+2. Object.seal prevents adding or deleting properties to an object. It also marks all existing properties as non-configurable. Values of present properties can still be changed as long as they are writable.
+3. It can be used in the following manner
+---
+```ts
+@sealed
+class Greeter {
+    greeting: string;
+    constructor(message: string) {
+        this.greeting = message;
+    }
+    greet() {
+        return "Hello, " + this.greeting;
+    }
+}
+```
 ---
 
 # Modules
 Modules are executed within their own scope, not in the global scope
 
 ```typescript
-
 import { ZipCodeValidator } from "./ZipCodeValidator";
 ```
 ---
@@ -358,12 +378,11 @@ import { ZipCodeValidator } from "./ZipCodeValidator";
 Exporting a declaration
 
 ```typescript
-
-export interface StringValidator {
+export interface ZipCodeValidator {
   isAcceptable(s: string): boolean;
 }
 ```
-and in another file in the same folder
+and as seen in previous example
 ```typescript
 import { ZipCodeValidator } from './ZipCodeValidator'
 ```
@@ -373,29 +392,29 @@ import { ZipCodeValidator } from './ZipCodeValidator'
 Each module can optionally export a default export
 
 ```typescript
-
 export default class ZipCodeValidator {
   // Class logic
 }
 ```
 and in another file in the same folder
 ```typescript
-import ZipCodeVal from './ZipCodeValidator'
+import ZipCodeArubaBahamaJamaica from './ZipCodeValidator'
 ```
+*Disclaimer*: When importing default exported variable you can name it as you'd like
+
 ---
 
 # Merging Namespaces with Classes, Functions, and Enums
 ```typescript
-
-class Album {
-  label: Album.AlbumLabel = new Album.AlbumLabel();
-}
 namespace Album {
   export class AlbumLabel { 
     .
     .
     .
   }
+}
+class Album {
+  label: Album.AlbumLabel = new Album.AlbumLabel();
 }
 ```
 ---
@@ -404,7 +423,6 @@ namespace Album {
 Partial Types
 
 ```typescript
-
 interface Todo {
   title: string;
   description: string;
@@ -448,11 +466,12 @@ declare module "lodash" {
   }
 }
 ```
-
+---
+# **React**
 ---
 # Introduction to **React**
 - JavaScript library for building user interfaces
-- Developed by Facebook
+- Developed by Facebook - 1st release *May 29th, 2013*
 - Component-based architecture
 ---
 # Why use React?
@@ -460,8 +479,12 @@ declare module "lodash" {
 - Component-Based: Encapsulated components that manage their own state
 - Learn Once, Write Anywhere: You can develop new features without rewriting existing code
 ---
+
+![Image](./img/components.png)
+
+---
 # React Foundations
-React is a declarative, efficient, and flexible JavaScript library for building user interfaces.
+React Hello World!
 
 ```jsx
 import React from 'react';
@@ -476,7 +499,6 @@ ReactDOM.render(<HelloWorld />, document.getElementById('root'));
 ---
 
 # Core React concepts
-
 
 --- 
 
@@ -510,7 +532,8 @@ class Welcome extends React.Component {
 --- 
 
 # Props
-Properties (props) - way to pass data from parent to child components
+*props (which stands for properties - no shit Sherlock 🧐😂)*
+- way to pass data from parent to child components
 ```typescript
 function Welcome(props) {
   return <h1>Hello, {props.name}</h1>;
@@ -524,7 +547,7 @@ const element = <Welcome name="John" />;
 # State & Lifecycle
 
 State - Similar to props but private and fully controlled by the component
-Lifecycle methods - special methods in the component class to run code at particular times in the process
+Lifecycle methods - special methods in the component level to run code at particular times in the process
 
 ---
 
@@ -584,39 +607,6 @@ function Example() {
 }
 ```
 
----
-# Building Practical Web Applications
-
-Use React components to build complex UIs from small, isolated pieces of code called "components".
-
-```jsx
-import React from 'react';
-
-function Welcome(props) {
-  return <h1>Hello, {props.name}</h1>;
-}
-
-function App() {
-  return <Welcome name="Sara" />;
-}
-
-export default App;
-```
----
-# Designing Class Components
-Class components in React are useful when your component needs to hold its own state values or use lifecycle methods.
-
-```jsx
-import React, { Component } from 'react';
-
-class Welcome extends Component {
-  render() {
-    return <h1>Hello, {this.props.name}</h1>;
-  }
-}
-
-export default Welcome;
-```
 --- 
 # Class Components with TypeScript
 TypeScript can be used with React to ensure type safety in your React code.
@@ -624,11 +614,11 @@ TypeScript can be used with React to ensure type safety in your React code.
 ```tsx
 import React, { Component } from 'react';
 
-interface Props {
+interface WelcomeProps {
   name: string;
 }
 
-class Welcome extends Component<Props> {
+class Welcome extends Component<WelcomeProps> {
   render() {
     return <h1>Hello, {this.props.name}</h1>;
   }
@@ -637,26 +627,6 @@ class Welcome extends Component<Props> {
 export default Welcome;
 ```
 --- 
-# Designing Stateful Function[al] Components
-In addition to class components, React also allows the use of function components.
-
-```jsx
-import React, { useState } from 'react';
-
-function Counter() {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-    </div>
-  );
-}
-
-export default Counter;
-```
 
 --- 
 # Stateful Function[al] Components with TypeScript
@@ -680,24 +650,7 @@ const Counter: React.FC = () => {
 export default Counter;
 ```
 --- 
-# Designing One-Way Data Flow
-In React, state and props flow down the component hierarchy.
 
-```jsx
-import React from 'react';
-
-function ParentComponent() {
-  return <ChildComponent name="Sara" />;
-}
-
-function ChildComponent(props) {
-  return <h1>Hello, {props.name}</h1>;
-}
-
-
-export default ParentComponent;
-```
---- 
 # One-Way Data Flow with TypeScript
 Use TypeScript with React to ensure type safety in one-way data flow.
 
@@ -708,12 +661,12 @@ interface ChildProps {
   name: string;
 }
 
-const ParentComponent: React.FC = () => {
-  return <ChildComponent name="Sara" />;
-}
-
 const ChildComponent: React.FC<ChildProps> = (props) => {
   return <h1>Hello, {props.name}</h1>;
+}
+
+const ParentComponent: React.FC = () => {
+  return <ChildComponent name="Sara" />;
 }
 
 export default ParentComponent;
@@ -725,15 +678,17 @@ Understanding modern JavaScript features such as
 - rest and spread operator
 - destructuring 
 - arrow functions 
-- default Parameters
+- default parameters
 - modules
+- ternary operator
+- null coalescing
 can help write better React code.
 
 ---
 
 # New Variables: `let` & `const`
 
-```
+```ts
 let name = 'John';
 name = 'Jane'; // Allowed
 
@@ -759,17 +714,20 @@ sum(1, 2, 3); // Returns 6
 # Destructuring
 ```typescript
 const person = {
-  name: 'John',
+  firstName: 'John',
+  lastName: 'Taramas',
   age: 30
 };
 
-const { name, age } = person;
+const { firstName, age } = person;
 ```
 
 ---
 
 # Arrow functions
 ```ts
+function add(a, b) {return a + b};
+// is the same as
 const add = (a, b) => a + b;
 
 add(3, 5); // Returns 8
@@ -808,6 +766,25 @@ console.log(add(1, 2)); // Outputs 3
 ```
 --- 
 
+# Ternary operator
+```typescript
+const x = 10;
+const y = 20;
+const z = x > y ? x : y;
+console.log(z); // Outputs 20
+```
+---
+
+# Null coalescing operator
+Null coalescing operator (??) is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.
+```typescript
+const foo = null ?? 'default string';
+console.log(foo);
+// expected output: "default string"
+```
+
+--- 
+
 # Analysis of Core React Tasks
 Understanding React's core tasks such as 
 - rendering elements
@@ -824,8 +801,11 @@ function ToggleButton() {
     setToggle(!isToggleOn);
   }
 
+  //rendering element
   return (
+    //handling events
     <button onClick={handleClick}>
+      //conditional rendering
       {isToggleOn ? 'ON' : 'OFF'}
     </button>
   );
@@ -841,14 +821,18 @@ TypeScript enhances React's core tasks with static type checks.
 import React, { useState } from 'react';
 
 const ToggleButton: React.FC = () => {
+  //static type check of isToggleOn type of value (boolean)
   const [isToggleOn, setToggle] = useState<boolean>(true);
 
   const handleClick = () => {
     setToggle(!isToggleOn);
   }
 
+  //rendering element
   return (
+    //handling events
     <button onClick={handleClick}>
+      //conditional rendering
       {isToggleOn ? 'ON' : 'OFF'}
     </button>
   );
@@ -864,13 +848,16 @@ We can use TypeScript with React to define complex types, interfaces and generic
 ```tsx
 import React, { useState } from 'react';
 
+//interfaces
 interface CounterProps {
   initialCount: number;
 }
 
+//generics
 const Counter: React.FC<CounterProps> = ({ initialCount }) => {
   const [count, setCount] = useState<number>(initialCount);
   return (
+    //complex return types
     <div>
       <p>You clicked {count} times</p>
       <button onClick={() => setCount(count + 1)}>
@@ -920,9 +907,7 @@ export default Counter;
 ```
 ---
 # Exploring More of React's Core Tasks
-- understanding conditional rendering
 - list rendering
-- handling events with React
 
 ```tsx
 import React, { useState } from 'react';
@@ -932,9 +917,60 @@ const ListComponent: React.FC = () => {
 
   return (
     <ul>
-      {items.map((item, index) => <li key={index}>{item}</li>)}
+      {items.map((item: string, index: number) => <li key={index}>{item}</li>)}
     </ul>
   );
+}
+
+export default ListComponent;
+```
+---
+# Exploring More of React's Core Tasks
+- handling events with React
+
+```tsx
+import React, { useState } from 'react';
+
+interface TextWithParagraphComponentProps {
+  initialText: string;
+}
+
+const TextWithParagraphComponent: React.FC<TextWithParagraphComponentProps> = ({ initialText }) => {
+  const [text, setText] = useState<string>(initialText);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setText(event.target.value);
+  };
+
+  return (
+    <div>
+      <input type="text" value={text} onChange={handleChange} />
+      <p>{text}</p>
+    </div>
+  );
+};
+
+export default TextWithParagraph;
+
+```
+---
+# Exploring More of React's Core Tasks
+- conditional rendering
+
+```tsx
+import React, { useState } from 'react';
+
+interface ListComponentProps{
+  items: string[];
+}
+const ListComponent: React.FC<ListComponentProps> = ({items}) => {
+
+  return items.length > 0 ? (
+    <ul>
+      {items.map((item, index) => <li key={index}>{item}</li>)}
+    </ul>
+  ) : 
+  (<div>The list has no items</div>);
 }
 
 export default ListComponent;
@@ -974,6 +1010,34 @@ class LifecycleComponent extends Component<Props> {
     return <h1>{this.props.message}</h1>;
   }
 }
+
+export default LifecycleComponent;
+```
+---
+# The same but with functional components and hooks
+
+```tsx
+import React, { useEffect } from 'react';
+
+interface Props {
+  message: string;
+}
+
+const LifecycleComponent: React.FC<Props> = ({ message }) => {
+  useEffect(() => {
+    console.log('Component did mount');
+    
+    return () => {
+      console.log('Component will unmount');
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log('Component did update');
+  }, [message]);
+
+  return <h1>{message}</h1>;
+};
 
 export default LifecycleComponent;
 ```
@@ -1033,7 +1097,8 @@ export default App;
 ---
 # Designing Forms and Handling Form Events
 React provides controlled components to handle form inputs and events.
-
+- React hook form
+- Formik
 ---
 
 ```tsx
