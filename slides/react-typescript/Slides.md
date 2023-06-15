@@ -21,12 +21,16 @@ style: |
     width: 150px;
     height: 150px;
   }
+  header {
+    margin-left: -30px;
+  }
 
   @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
 
 
----
+header: ![Image width:100% margin-left:-10px](./img/header.png)
 
+---
 # TypeScript Foundations
 
 ---
