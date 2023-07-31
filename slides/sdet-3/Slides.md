@@ -19,8 +19,14 @@ style: |
     color: blue;
   }
   .qrcode {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
+  }
+
+   .presentation {
+    width: 160px;
+    height: 160px;
+    margin-top: 90px;
   }
 
   @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
@@ -45,6 +51,12 @@ My book on MFEs 🤘
 ![Image](./img/book.png)
 
 </div>
+<div class="presentation">
+Presentation
+
+![Image](./img/presentation.png)
+
+</div>
 </div>
 </div>
 
@@ -59,7 +71,7 @@ My book on MFEs 🤘
 # Our Journey with MFEs so far
 - In 2019, we embarked on a journey with MFEs to tackle the challenges of scaling our codebase and making our teams more autonomous.
 - We started Single SPA as our framework, today we consider switching to Module Federation.
-- Our main focus at the start was to create a seamless experience between our Elm and React-based applications, ensuring smooth interoperability.
+- Need: implement a smooth experience between our Elm and React-based applications
 - We introduced BlackBox pattern to address mini apps implementation
 
 ---
@@ -100,7 +112,7 @@ My book on MFEs 🤘
 
 # Solution #1: The BlackBox Pattern for Mini Apps
 - We used the BlackBox pattern to create single-page mini apps as MFEs.
-- These black-box apps communicate with other applications through custom events and can be rendered or hidden from the DOM as needed. 
+- These black-box apps communicate with other MFEs through custom events and can be rendered or hidden from the DOM as needed. 
 
 ---
 
@@ -150,8 +162,8 @@ My book on MFEs 🤘
   - Single code repository simplifies development and organization. 
   - Reduce dependencies between repos
 - Cons: 
-  - May introduce complex CI pipelines for proper building, testing, and deployment. 
-  - May introduce complexity around MFE communication
+  - Introduce complex CI pipelines for proper building, testing, and deployment. 
+  - Introduce complexity around MFE communication
 
 ---
 
@@ -171,19 +183,19 @@ My book on MFEs 🤘
 
 # The Future of Mini Apps
 - We're considering implementing Solution 4
-- although its implementation effort might be significantly bigger compared to Solution 3
+- Although its implementation effort might be significantly bigger compared to Solution 3
 
 ---
 
 # Transition to a React-only Approach
-- As we transition to a React-only approach, it’s crucial to explore new solutions that align with our evolving technology stack. 
+- As we transition to a React-only approach, it’s crucial to explore new solutions that align with our evolving tech stack. 
 - We're excited about the opportunities this shift presents.
-- At last ***static typing via Typescript!***
+- At last ***static typing via Typescript!*** 🤘
 
 ---
 
 # The Role of Module Federation
-- We are considering to switch from Single SPA to Module Federation
+We are considering to switch from Single SPA to Module Federation
   - Module Federation enables the seamless sharing of components across applications.
   - Is almost the industry standard around code splitting.
 
@@ -204,7 +216,7 @@ My book on MFEs 🤘
 # Key learnings 2/2
 
 - Transitioning to a React-only approach opens up new opportunities and strategies, like catching errors on build time.
-- Evaluating each solution's pros and cons, considering factors like team preferences, performance requirements, and maintainability, is crucial for making informed decisions in the MFE world.
+- Evaluating each solution's pros and cons is crucial for making informed decisions in the MFE world.
 - Our journey with web components has equipped us with essential tools to tackle complex UI challenges, and we're excited to apply these learnings to our future work.
 
 ---
@@ -224,8 +236,18 @@ My book on MFEs 🤘
 
 <div>
 
-[Github repo](https://github.com/ngkamperlo/blackbox)
-![Image](./img/frame.png)
+<div class="qrcode">
+My book on MFEs 🤘
+
+![Image](./img/book.png)
+
+</div>
+<div class="presentation">
+Presentation
+
+![Image](./img/presentation.png)
+
+</div>
 
 </div>
 </div>
