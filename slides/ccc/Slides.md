@@ -21,7 +21,7 @@ style: |
 
   .storybook {
     width: 100%;
-    height: 100%;****
+    height: 100%;
   }
 
   .qrcode {
@@ -38,6 +38,7 @@ style: |
   .small-text {
     font-size: 0.6rem;
   }
+
   @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
 
 ---
@@ -71,11 +72,13 @@ Presentation
 
 ---
 
+
 # Empowering Business Agility
 ## Building a Successful Cloud Engineering Team using 
 ## **Infrastructure as Code** (IaC)
 
 ---
+
 
 # Agenda
 
