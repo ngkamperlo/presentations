@@ -138,23 +138,25 @@ Presentation
   - **Reliability**: Reduced human error and downtime.
   - **Security**: Automated compliance and monitoring.
   - **Cost Optimization**: Efficient resource utilization.
+  - **Time to production**: Faster times to create your infrastructure.
 
 ---
 # Infrastructure as Code (IaC)
 ## **Tools and Technologies**
-  - Terraform (AWS CloudFormation, Azure Resource Manager, Google Cloud Deployment Manager)
-  - Bicep
+  - Terraform (Bicep, AWS CloudFormation, Azure Resource Manager, Google Cloud Deployment Manager)
   - Formatting(YAML, JSON, CSV)
   - Actual programming languages (Python, Go, TypeScript(JavaScript))
-  - PowerShell, Bash
-  - Docker, Kubernetes, Helm
-  - Istio, Linkerd
-  - Consul, Prometheus, Grafana
+  - Scripting (PowerShell, Bash)
+  - Containerization (Docker, Kubernetes, Helm)
+  - Service meshes (Istio, Linkerd)
+  - Monitoring and alerting (Consul, Prometheus, Grafana)
+  - Automatic account vending (AFT)
   - Policy as code (OPA - Rego)
 
 ---
 
 # Infrastructure as Code (IaC) - **Best Practices for Implementation**
+- Build your Lego blocks
 - Start Small and Scale
 - Automate Everything
 - Version Control
@@ -173,13 +175,12 @@ Presentation
 |---|---|
 |Lack of Skills and Expertise| Training and Development |
 |Resistance to Change| Change Management |
-|Legacy Systems and Technical Debt| Collaboration and Communication |
+|Legacy Systems and Technical Debt| Collaboration and Communication / Change Management |
 |Silos and Communication Gaps| Collaboration and Communication |
 |Security and Compliance Concerns| Top down Automation and Orchestration |
 |Cost Overruns and Budget Constraints| Cost Management and Optimization |
 |Performance and Scalability Issues| Performance Tuning and Monitoring |
 |Complexity| Training and Development |
-|Learning Curve| Training and Development |
 |Cultural Shift| Continuous improvement by making space for innovation and experimentation |
 |Heavy initial time investment| Change Management / Expectation setting |
 
