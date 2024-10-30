@@ -94,8 +94,26 @@ Presentation
 
 ### What is AWS AFT?
 
+- **Initially AWS Landing Zone** AWS Landing Zone helped the users to setup multi account AWS environment with all the recommended best practices.
+- **Later rebranded to AWS Control Tower** along with additional features - It provides a central management of multi account AWS organization.
+- **AWS Control Tower does not come with an API** - a need was created to automate the whole process using IaC.
 - **AWS Account Factory for Terraform (AFT)** automates the provisioning and management of AWS accounts.
-- **Goal**: Enable **hands-free** account creation, management, and governance at scale.
+- **Goal**: Enable **hands-free** account creation, management, and governance at scale using IaC.
+
+---
+
+# AWS Control Tower
+
+- Automates setup of a **landing zone** for multi-account AWS environments.
+- Centralized **identity management** for all accounts using AWS SSO.
+- **Centralized logging** for CloudTrail and Config, directed to a logging account.
+- **Guardrails** for preventive and detective controls applied to governed accounts.
+- **Account Factory** for standardized, pre-approved account configurations.
+- **Dashboard** enables administrators to:
+  - View provisioned accounts across the enterprise.
+  - Monitor controls for **policy enforcement**.
+  - Detect policy **non-compliance** across accounts and OUs.
+  - Organize noncompliant resources by account and organizational unit.
 
 ---
 
@@ -174,13 +192,12 @@ Presentation
 
 ---
 
-# Event-Driven Automation
+# AWS AFT Repositories Overview
 
-### How It Works
-
-- **SNS Events**: Notify when an account is created or updated.
-- **Lambda Triggers**: Execute code to customize or validate accounts.
-- **DynamoDB**: Tracks status and stores metadata for each account.
+1. **Account Request Repository (aft-account-request)** Main repository for Terraform account templates to trigger account provisioning workflows.
+2. **Global Customizations (aft-global-customizations)** Applies standard resources or settings globally across all accounts.
+3. **Account-Specific Customizations (aft-account-customizations)** Customize individual accounts based on organization needs.
+4. **Provisioning Customizations (aft-account-provisioning-customizations)** Hooks into the account vending process to apply specific configurations during account setup.
 
 ---
 
@@ -191,16 +208,6 @@ Presentation
 - **Automation**: Eliminate manual effort in account creation and governance.
 - **Security & Governance**: Implement consistent security and compliance controls.
 - **Customizable**: Adapt workflows using Terraform, Lambda, and SNS for organizational needs.
-
----
-
-# Best Practices for AFT
-
-### Recommendations
-
-- **Security**: Use robust IAM roles and policies for automation.
-- **Governance**: Maintain consistent governance with Control Tower and Terraform.
-- **Customization**: Tailor workflows to match your organization's operational requirements.
 
 ---
 
