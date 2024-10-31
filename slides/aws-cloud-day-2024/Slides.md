@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: default
-paginate: true
+# paginate: true
 # header: "Hands-Free Account Creation"
 # footer: "AWS AFT | Terraform"
 title: "Hands-Free Account Creation: Zero Clicks with AWS AFT"
@@ -47,7 +47,7 @@ style: |
 <div class="columns">
 <div>
 
-### Thanos Kataras - Global GCP Cloud Engineering Lead **@ Mondelẽz**</br>
+### Thanos Kataras - Global Cloud Engineering Lead **@ Mondelẽz**</br>
 
 <i class="fa-brands fa-linkedin"></i> &nbsp; [https://www.linkedin.com/in/athanasios-kataras-b9384440/)](https://www.linkedin.com/in/athanasios-kataras-b9384440/)
 <i class="fa-brands fa-github"></i> &nbsp; [https://github.com/thanos-kataras](https://github.com/thanos-kataras)
