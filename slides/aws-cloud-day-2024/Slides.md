@@ -78,21 +78,22 @@ Presentation
 
 ---
 
-# Hands-Free Account Creation: Zero Clicks with AWS AFT
+## Hands-Free Account Creation: Zero Clicks with AWS AFT
 
-## Agenda
-
-1. **Introduction to AWS AFT**
-2. **AFT Architecture Overview**
-3. **Terraform Integration with AFT**
-4. **Account Factory Workflow**
-5. **High-Level Points & Best Practices**
+### Agenda
+- History Lesson
+- AWS Control Tower
+- Control Tower + Terraform: AWS AFT Benefits
+- AFT Architecture Overview
+- AFT Workflow
+- Core Services in AFT
+- Custom Workflows in AFT
+- AWS AFT Repositories Overview
+- Key Points & Best Practices
 
 ---
 
-# Introduction to AWS AFT
-
-### What is AWS AFT?
+# History Lesson
 
 - **Initially AWS Landing Zone** AWS Landing Zone helped the users to setup multi account AWS environment with all the recommended best practices.
 - **Later rebranded to AWS Control Tower** along with additional features - It provides a central management of multi account AWS organization.
@@ -117,13 +118,18 @@ Presentation
 
 ---
 
-# Benefits of AWS AFT
+## Control Tower + Terraform: AWS AFT Benefits
 
-### Why Use AWS AFT?
+### Terraform Overview
 
-- **Zero Touch**: Automates account provisioning and account lifecycle management.
-- **Governance at Scale**: Ensures each account follows organizational standards.
-- **Security & Compliance**: Implements consistent security guardrails and controls across all accounts.
+- Terraform: An Infrastructure as Code (IaC) tool that streamlines cloud resource setup and management.
+- AFT Module: Adds seamless integration of Terraform with AWS Account Factory for automated provisioning.
+
+### Key Benefits of AWS AFT
+
+- Hands-Free Provisioning: Automates the full account setup and lifecycle management, reducing manual steps.
+- Scalable Governance: Enforces organizational standards across all accounts, ensuring consistency as you grow.
+- Built-In Security & Compliance: Applies guardrails and compliance policies automatically, securing accounts from the start.
 
 ---
 
@@ -141,36 +147,7 @@ Presentation
 
 ---
 
-# Core Services in AFT
-
-### Services Supporting AFT
-
-- **Lambda**: Runs custom code to extend account creation workflows.
-- **SNS & SQS**: Event-driven messaging to trigger and monitor account provisioning.
-- **DynamoDB**: Stores metadata on account configurations and status.
-
----
-
-# Terraform Integration with AFT
-
-### Terraform Overview
-
-- **Terraform**: Infrastructure as Code (IaC) tool that simplifies cloud resource management.
-- **AFT Module**: A specific module to integrate Terraform with AWS Account Factory.
-
----
-
-# Benefits of Terraform with AFT
-
-### Terraform Advantages
-
-- **Consistency**: Ensures that all accounts are provisioned with the same configurations.
-- **Modularity**: Easily adjust configurations for different accounts or environments.
-- **Scalability**: Handle account creation across multiple regions and teams efficiently.
-
----
-
-# Account Factory Workflow
+# AFT Workflow
 
 ### Steps of Account Creation
 
@@ -179,6 +156,16 @@ Presentation
 3. **Provision Account**: The AVM provisions accounts automatically.
 4. **Customization**: Apply custom configurations (policies, tags, etc.).
 5. **Monitor Compliance**: Use AWS Config and Lambda to enforce rules.
+
+---
+
+# Core Services in AFT
+
+### Services Supporting AFT
+
+- **Lambda**: Runs custom code to extend account creation workflows.
+- **SNS & SQS**: Event-driven messaging to trigger and monitor account provisioning.
+- **DynamoDB**: Stores metadata on account configurations and status.
 
 ---
 
@@ -201,7 +188,7 @@ Presentation
 
 ---
 
-# High-Level Points & Best Practices
+# Points & Best Practices
 
 ### Key Takeaways
 
